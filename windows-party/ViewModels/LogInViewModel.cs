@@ -42,7 +42,6 @@ namespace Tesonet.Windows.Party.ViewModels
             try
             {
                 ShowErrorMessage = false;
-                //TODO async
                 var token = await _authService.LogIn(Username, Password);
                 LogInSuccessful(new User(Username, token));
             }

@@ -21,13 +21,21 @@ namespace Tesonet.Windows.Party.ViewModels
             _loginViewModel = Bootstrapper.Container.Resolve<LogInViewModel>();
             _serverListViewModel = Bootstrapper.Container.Resolve<ServerListViewModel>();
             CurrentViewModel = _loginViewModel;
-            _loginViewModel.LogInSuccessful += ShowServerList;
+            _loginViewModel.LogInSuccessful += OnLogIn;
+            _serverListViewModel.LogOut += OnLogOut;
         }
 
-        private void ShowServerList(User user)
+        private async void OnLogIn(User user)
         {
             _serverListViewModel.LoggedInUser = user;
             CurrentViewModel = _serverListViewModel;
+            await _serverListViewModel.LoadServers();
+        }
+
+        private void OnLogOut()
+        {
+            _loginViewModel.Password = string.Empty;
+            CurrentViewModel = _loginViewModel;
         }
     }
 }

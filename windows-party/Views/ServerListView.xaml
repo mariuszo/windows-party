@@ -9,10 +9,17 @@
         <StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Label Content="testio."/>
-                <Button Content="Log out"/>
+                <Button Content="Log out" Command="{Binding LogOutCommand}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <ListView />
+                <DataGrid ItemsSource="{Binding Servers}"
+                          AutoGenerateColumns="False"
+                          CanUserAddRows="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="SERVER" Binding="{Binding Name}" />
+                        <DataGridTextColumn Header="DISTANCE" Binding="{Binding Distance}" />
+                    </DataGrid.Columns>
+                </DataGrid>
                 <Image />
             </StackPanel>
         </StackPanel>
