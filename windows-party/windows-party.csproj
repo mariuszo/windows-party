@@ -132,6 +132,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\bg-login.png" />
+    <Resource Include="Images\list-img.png" />
+    <Resource Include="Images\logo-list.png" />
+    <Resource Include="Images\logo-login.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

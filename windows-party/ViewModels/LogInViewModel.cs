@@ -45,10 +45,10 @@ namespace Tesonet.Windows.Party.ViewModels
                 var token = await _authService.LogIn(Username, Password);
                 LogInSuccessful(new User(Username, token));
             }
-            catch (HttpRequestException ex)
+            catch (HttpRequestException hex)
             {
                 ShowErrorMessage = true;
-                ErrorMessage = "Invalid username or passowrd";
+                ErrorMessage = "Invalid username or password";
                 //TODO Log
             }
             catch (Exception ex) 

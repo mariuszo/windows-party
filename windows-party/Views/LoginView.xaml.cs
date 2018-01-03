@@ -17,8 +17,14 @@ namespace Tesonet.Windows.Party.Views
 
         private void Password_PasswordChanged(object sender, RoutedEventArgs e)
         {
+            var pwBox = (PasswordBox)sender;
             if (DataContext != null)
-                ((dynamic)DataContext).Password = ((PasswordBox)sender).Password; 
+                ((dynamic)DataContext).Password = pwBox.Password;
+
+            if (pwBox.Password.Length == 0)
+                PasswordHint.Visibility = Visibility.Visible;
+            else
+                PasswordHint.Visibility = Visibility.Collapsed;
         }
     }
 }
