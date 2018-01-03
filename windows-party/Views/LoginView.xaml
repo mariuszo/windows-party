@@ -56,7 +56,7 @@
             <Image Source="/Images/logo-login.png" Height="95" Margin="0 0 0 30"/>
             <Grid>
                 <TextBox Name="UsernameTextBox" Text="{Binding Username}" Style="{StaticResource InputBox}" Template="{StaticResource TextBoxBaseControlTemplate}" />
-                <TextBlock IsHitTestVisible="False" Text="Username" Padding="15 15 15 5" HorizontalAlignment="Left" Margin="0 10 0 0" FontFamily="Arial" FontSize="16" Foreground="#999">
+                <TextBlock IsHitTestVisible="False" Text="Username" Padding="16 15 15 5" HorizontalAlignment="Left" Margin="0 10 0 0" FontFamily="Arial" FontSize="16" Foreground="#999">
                     <TextBlock.Style>
                         <Style TargetType="{x:Type TextBlock}">
                             <Setter Property="Visibility" Value="Collapsed"/>
@@ -71,10 +71,10 @@
             </Grid>
             <Grid>
                 <PasswordBox PasswordChanged="Password_PasswordChanged" Style="{StaticResource InputBox}" Template="{StaticResource PasswordBoxBaseControlTemplate}" />
-                <TextBlock Name="PasswordHint" IsHitTestVisible="False" Text="Password" Padding="15 15 15 5" HorizontalAlignment="Left" Margin="0 10 0 0" FontFamily="Arial" FontSize="16" Foreground="#999" Visibility="Visible"/>
+                <TextBlock Name="PasswordHint" IsHitTestVisible="False" Text="Password" Padding="16 15 15 5" HorizontalAlignment="Left" Margin="0 10 0 0" FontFamily="Arial" FontSize="16" Foreground="#999" Visibility="Visible"/>
             </Grid>
             <Button Content="Log In" Command="{Binding LogInCommand}" FontFamily="Arial" FontWeight="Bold" Foreground="White" Margin="0 10 0 10" FontSize="16" Height="50" Template="{StaticResource ButtonBaseControlTemplate}"/>
-            <TextBlock Text="{Binding ErrorMessage}" Visibility="{Binding ShowErrorMessage, Converter={StaticResource BooleanToVisibilityConverter}}" FontFamily="Arial" FontWeight="Bold" Foreground="White" Margin="0 10 0 0" FontSize="16" Height="50"/>
+            <TextBlock TextWrapping="Wrap" Text="{Binding ErrorMessage}" Visibility="{Binding ShowErrorMessage, Converter={StaticResource BooleanToVisibilityConverter}}" FontFamily="Arial" FontWeight="Bold" Foreground="White" Margin="0 10 0 0" FontSize="16" Height="50"/>
         </StackPanel> 
     </Grid>
 </UserControl>
