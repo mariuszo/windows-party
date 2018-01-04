@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Net.Http;
+using System.Reflection;
+using log4net;
 using Tesonet.Windows.Party.Helpers;
 using Tesonet.Windows.Party.Models;
 using Tesonet.Windows.Party.Services;
@@ -8,6 +10,8 @@ namespace Tesonet.Windows.Party.ViewModels
 {
     public class LogInViewModel : ViewModelBase
     {
+        private readonly ILog _log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
         public string Username { private get; set; }
         public string Password { private get; set; }
 
@@ -45,11 +49,17 @@ namespace Tesonet.Windows.Party.ViewModels
                 var token = await _authService.LogIn(Username, Password);
                 LogInSuccessful(new User(Username, token));
             }
+            catch (HttpRequestException hex)
+            {
+                ShowErrorMessage = true;
+                ErrorMessage = hex.Message;
+                _log.Warn($"Failed to authenticate {Username}. Error: {hex.Message}", hex);
+            }
             catch (Exception ex)
             {
                 ShowErrorMessage = true;
-                ErrorMessage = ex.Message;
-                //TODO Log
+                ErrorMessage = "Unexpected error has occured";
+                _log.Error("Unexpected error has occured.", ex);
             }
         }
     }

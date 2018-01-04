@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
+using System.Reflection;
 using System.Threading.Tasks;
+using log4net;
 using Tesonet.Windows.Party.Helpers;
 using Tesonet.Windows.Party.Models;
 using Tesonet.Windows.Party.Repositories;
@@ -12,6 +11,8 @@ namespace Tesonet.Windows.Party.ViewModels
 {
     public class ServerListViewModel : ViewModelBase
     {
+        private readonly ILog _log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
         public User LoggedInUser { get; set; }
 
         private readonly IServerRepository _serverRepository;
@@ -35,8 +36,14 @@ namespace Tesonet.Windows.Party.ViewModels
 
         public async Task LoadServers()
         {
-            // TODO handle exception
-            Servers = new ObservableCollection<Server>(await _serverRepository.GetServers(LoggedInUser.Token));
+            try
+            {
+                Servers = new ObservableCollection<Server>(await _serverRepository.GetServers(LoggedInUser.Token));
+            }
+            catch (Exception ex)
+            {
+                _log.Error("Error retrieving server list.", ex);
+            }
         }
 
         private void OnLogOut()
